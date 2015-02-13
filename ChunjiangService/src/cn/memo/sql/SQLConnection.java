@@ -2,17 +2,20 @@ package cn.memo.sql;
 
 import java.sql.*;
 import java.util.*;
+
+import com.sina.sae.util.SaeUserInfo;
 public class SQLConnection {
 
 	public Connection startConn(Connection conn){
 		String driver = "com.mysql.jdbc.Driver";
-	        String url = "jdbc:mysql://127.0.0.1:3306/chuanjiang1";
-	        // MySQL配置时的用户名
-	        String user = "root"; 
-	        // MySQL配置时的密码
-	        String password = "chunjiang1";
+//		String url = "jdbc:mysql://127.0.0.1:3306/chuanjiang1";
+//	        String password = "chunjiang1";
+//	        String user =  "root";
+	        String url="jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_memoandfriends";
+	        String user =  SaeUserInfo.getAccessKey();
+	        String password = SaeUserInfo.getSecretKey();
 	        try{
-	        	Class.forName(driver);
+	        	Class.forName(driver).newInstance();
 	        	 conn = DriverManager.getConnection(url, user, password);
 	        	 if(!conn.isClosed()) 
 	        	          System.out.println("Succeeded connecting to the Database!");
@@ -22,6 +25,12 @@ public class SQLConnection {
 	                e.printStackTrace();
 
 	        } catch (SQLException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	        return conn;

@@ -43,14 +43,14 @@ public class MyHandle {
 	}
 	
 	public static String getRootPath(){
-		String result = "C:/Users/Memo/workspace/ChunjiangService";
-		
+		String result = "";
 		System.out.println(result);
 		return result;
 	}
 	
 	public static void main(String[] args) {
-		MyHandle.getBASE64fromImgPath("/images/topbar.jpg");
+		String string = MyHandle.getBASE64fromImgPath("/images/topbar.jpg");
+		System.out.println(string);
 	}
 	
 	public static String getDate(String fmt) {

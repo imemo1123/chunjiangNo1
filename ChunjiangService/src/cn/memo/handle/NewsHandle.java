@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 
+
 import cn.memo.instance.News;
+import cn.memo.parameter.Parameter;
 import cn.memo.sql.SQLConnection;
 
 public class NewsHandle {
@@ -20,8 +22,8 @@ public class NewsHandle {
 		for (int i = 0; i < newsList.size(); i++) {
 			Map<String,String> m = newsList.get(i);
 			String path = (String) m.get("picture");
-			String src = MyHandle.getBASE64fromImgPath(path);
-			m.put("picture", src);
+			//String src = MyHandle.getBASE64fromImgPath(path);
+			m.put("picture", Parameter.HOST_URL+path);
 			newsList1.add(m);
 		}
 		return newsList1;
@@ -33,8 +35,8 @@ public class NewsHandle {
 		SQLConnection conn = new SQLConnection();
 		news = conn.querySingleData(sqlString, News.getDetailTabNames());
 		String path = (String) news.get("picture");
-		String src = MyHandle.getBASE64fromImgPath(path);
-		news.put("picture", src);
+		//String src = MyHandle.getBASE64fromImgPath(path);
+		news.put("picture",Parameter.HOST_URL+path);
 		return news;
 	}
 }
